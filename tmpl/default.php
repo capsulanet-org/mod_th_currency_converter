@@ -182,14 +182,18 @@ jQuery(document).ready(function(){
 		"ZWD" => JText::_('MOD_TH_CURRENCY_CONVERTER_ZIMBABWE_DOLLAR')." (ZWD)"
 		);
 		
+		$currency = JRequest::getVar('currency');
+		if(isset($currency))
+			$value=$currency;	
+		else
+			$value='USD';
 		
-		//Create a blank option in first place for jQuery chosen plugin
-		array_splice($currencies, 0, 0, "");
 		$attr = array(
 	        'id'          => 'currency',
-	        'list.attr'   => 'class="chzn-select-currency" '
-		. 'data-no_results_text="' . JText::_('MOD_TH_CURRENCY_CONVERTER_NO_RESULTS') . '" '
-		. 'data-placeholder="' . JText::_('MOD_TH_CURRENCY_CONVERTER_SELECT_CURRENCY') . '" '
+	        'list.select' => $value,
+	         'list.attr'   => 'class="chzn-select-currency" '
+		    . 'data-no_results_text="' . JText::_('MOD_TH_CURRENCY_CONVERTER_NO_RESULTS') . '" '
+		    . 'data-placeholder="' . JText::_('MOD_TH_CURRENCY_CONVERTER_SELECT_CURRENCY') . '" '
         );
 		$str = JHtml::_('select.genericlist', $currencies, 'currency', $attr);
 	    echo $str;
